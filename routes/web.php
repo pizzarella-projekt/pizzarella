@@ -19,6 +19,18 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Home');
 });
+Route::get('/aktualnosci', function () {
+    return Inertia::render('Aktualnosci');
+});
+Route::get('/menu', function () {
+    return Inertia::render('Menu');
+});
+Route::get('/galeria', function () {
+    return Inertia::render('Galeria');
+});
+Route::get('/kontakt', function () {
+    return Inertia::render('Kontakt');
+});
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
