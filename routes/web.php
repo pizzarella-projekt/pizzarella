@@ -25,11 +25,18 @@ Route::get('/aktualnosci', function () {
 Route::get('/menu', function () {
     return Inertia::render('Menu');
 });
+Route::get('/menu/{id}', function () {
+    return Inertia::render('Produkt');
+});
 Route::get('/galeria', function () {
     return Inertia::render('Galeria');
 });
 Route::get('/kontakt', function () {
     return Inertia::render('Kontakt');
+});
+
+Route::get('/admin', function () {
+    return Inertia::render('Admin/Menu');
 });
 
 Route::get('/dashboard', function () {
