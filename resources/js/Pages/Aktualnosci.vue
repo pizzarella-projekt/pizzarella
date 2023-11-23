@@ -4,19 +4,13 @@ import { fakerPL as faker } from '@faker-js/faker';
 import MainLayout from '@/Layouts/MainLayout.vue';
 
 const posts = () => {
-    const posts = [];
-
-    for (let i = 0; i < 10; i++) {
-        posts.push({
-            title: faker.lorem.sentence({ min: 4, max: 10 }),
-            date: faker.date.anytime().toLocaleDateString("pl-PL"),
-            category: "Aktualności",
-            image: "https://picsum.photos/200/200",
-            description: faker.lorem.lines({ min: 2, max: 5 }),
-        });
-    }
-
-    return posts;
+    return Array.from({ length: 10 }, () => ({
+        title: faker.lorem.sentence({ min: 4, max: 10 }),
+        date: faker.date.anytime().toLocaleDateString("pl-PL"),
+        category: "Aktualności",
+        image: "https://picsum.photos/200/200",
+        description: faker.lorem.lines({ min: 2, max: 5 }),
+    }));
 };
 </script>
 
