@@ -10,7 +10,9 @@ import { Link } from '@inertiajs/vue3';
             <span class="text-3xl font-bold text-white">Panel administratora</span>
             </Link>
             <div class="flex gap-4 text-white">
-                <Link href="/admin">Menu</Link>
+                <Link href="/admin/menu">Menu</Link>
+                <Link href="/admin/aktualnosci">Aktualności</Link>
+                <Link href="/admin/zamowienia">Zamówienia</Link>
             </div>
         </header>
         <div class="w-full flex-grow">

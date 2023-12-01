@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue';
 import { Head } from '@inertiajs/vue3';
-import { fakerPL as faker } from '@faker-js/faker';
 import MainLayout from '@/Layouts/MainLayout.vue';
 
 const product = {

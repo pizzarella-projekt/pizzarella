@@ -38,6 +38,15 @@ Route::get('/kontakt', function () {
 Route::get('/admin', function () {
     return Inertia::render('Admin/Menu');
 });
+Route::get('/admin/menu', function () {
+    return Inertia::render('Admin/Menu');
+});
+Route::get('/admin/aktualnosci', function () {
+    return Inertia::render('Admin/Aktualnosci');
+});
+Route::get('/admin/zamowienia', function () {
+    return Inertia::render('Admin/Zamowienia');
+});
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
