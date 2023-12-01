@@ -47,6 +47,9 @@ Route::get('/admin/aktualnosci', function () {
 Route::get('/admin/zamowienia', function () {
     return Inertia::render('Admin/Zamowienia');
 });
+Route::get('/admin/galeria', function () {
+    return Inertia::render('Admin/Galeria');
+});
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

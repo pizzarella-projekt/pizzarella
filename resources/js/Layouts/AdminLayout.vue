@@ -1,5 +1,4 @@
 <script setup>
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import { Link } from '@inertiajs/vue3';
 </script>
 
@@ -13,6 +12,7 @@ import { Link } from '@inertiajs/vue3';
                 <Link href="/admin/menu">Menu</Link>
                 <Link href="/admin/aktualnosci">Aktualności</Link>
                 <Link href="/admin/zamowienia">Zamówienia</Link>
+                <Link href="/admin/galeria">Galeria</Link>
             </div>
         </header>
         <div class="w-full flex-grow">
