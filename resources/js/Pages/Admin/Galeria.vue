@@ -1,6 +1,5 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
-import { fakerPL as faker } from '@faker-js/faker';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 
 const images = () => {

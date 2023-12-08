@@ -35,20 +35,20 @@ Route::get('/kontakt', function () {
     return Inertia::render('Kontakt');
 });
 
-Route::get('/admin', function () {
-    return Inertia::render('Admin/Menu');
-});
-Route::get('/admin/menu', function () {
-    return Inertia::render('Admin/Menu');
-});
-Route::get('/admin/aktualnosci', function () {
-    return Inertia::render('Admin/Aktualnosci');
-});
-Route::get('/admin/zamowienia', function () {
-    return Inertia::render('Admin/Zamowienia');
-});
-Route::get('/admin/galeria', function () {
-    return Inertia::render('Admin/Galeria');
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], function () {
+    Route::redirect('/', '/admin/menu');
+    Route::get('/menu', function () {
+        return Inertia::render('Admin/Menu');
+    });
+    Route::get('/aktualnosci', function () {
+        return Inertia::render('Admin/Aktualnosci');
+    });
+    Route::get('/zamowienia', function () {
+        return Inertia::render('Admin/Zamowienia');
+    });
+    Route::get('/galeria', function () {
+        return Inertia::render('Admin/Galeria');
+    });
 });
 
 Route::get('/dashboard', function () {
@@ -61,4 +61,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
