@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PhotoController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
@@ -19,16 +21,19 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Home');
+    $products = Product::take(6)->get();
+    return Inertia::render('Home', ['products' => $products]);
 });
 Route::get('/aktualnosci', function () {
     return Inertia::render('Aktualnosci');
 });
 Route::get('/menu', function () {
-    return Inertia::render('Menu');
+    $products = Product::all();
+    return Inertia::render('Menu', ['products' => $products]);
 });
-Route::get('/menu/{id}', function () {
-    return Inertia::render('Produkt');
+Route::get('/menu/{id}', function ($id) {
+    $product = Product::find($id);
+    return Inertia::render('Produkt', ['product' => $product]);
 });
 Route::get('/galeria', function () {
     $files = Storage::disk('public')->allFiles('gallery');
@@ -43,9 +48,8 @@ Route::delete('/photos/{photo}', [PhotoController::class, 'destroy'])->where('ph
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], function () {
     Route::redirect('/', '/admin/menu');
-    Route::get('/menu', function () {
-        return Inertia::render('Admin/Menu');
-    });
+    Route::resource('menu', ProductController::class)->except(['show']);
+
     Route::get('/aktualnosci', function () {
         return Inertia::render('Admin/Aktualnosci');
     });
