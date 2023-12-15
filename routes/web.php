@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\PhotoController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 /*
@@ -29,11 +31,15 @@ Route::get('/menu/{id}', function () {
     return Inertia::render('Produkt');
 });
 Route::get('/galeria', function () {
-    return Inertia::render('Galeria');
+    $files = Storage::disk('public')->allFiles('gallery');
+    return Inertia::render('Galeria', ['images' => $files]);
 });
 Route::get('/kontakt', function () {
     return Inertia::render('Kontakt');
 });
+
+Route::post('/photos', [PhotoController::class, 'store'])->name('photos.store');
+Route::delete('/photos/{photo}', [PhotoController::class, 'destroy'])->where('photo', '.*')->name('photos.destroy');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], function () {
     Route::redirect('/', '/admin/menu');
@@ -47,8 +53,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], functi
         return Inertia::render('Admin/Zamowienia');
     });
     Route::get('/galeria', function () {
-        return Inertia::render('Admin/Galeria');
-    });
+        $files = Storage::disk('public')->allFiles('gallery');
+        return Inertia::render('Admin/Galeria', ['images' => $files]);
+    })->name('admin.galeria');
 });
 
 Route::get('/dashboard', function () {
