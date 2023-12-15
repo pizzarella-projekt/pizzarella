@@ -1,17 +1,15 @@
 <script setup>
-import { Head } from '@inertiajs/vue3';
-import { fakerPL as faker } from '@faker-js/faker';
+import moment from 'moment';
+import { Head, Link, router } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 
-const orders = () => {
-    return Array.from({ length: 6 }, (_, i) => ({
-        id: i + 1,
-        date: faker.date.anytime().toLocaleDateString("pl-PL"),
-        fullName: faker.person.firstName() + " " + faker.person.lastName(),
-        price: faker.finance.amount(20, 200, 2),
-        status: "Zrealizowane",
-    }));
-};
+defineProps({
+    orders: Array,
+});
+
+const deleteOrder = (id) => {
+    router.delete(route('zamowienia.destroy', id));
+}
 </script>
 
 <template>
@@ -29,14 +27,19 @@ const orders = () => {
                     <div class="min-w-[150px]">Status</div>
                     <div class="min-w-[200px]">Akcje</div>
                 </div>
-                <div v-for="order in orders()" :key="order.id" class="flex gap-8 w-full bg-white p-8">
+                <div v-for="order in orders" :key="order.id" class="flex gap-8 w-full bg-white p-8">
                     <div class="">{{ order.id }}</div>
-                    <div class="min-w-[150px]">{{ order.date }}</div>
-                    <div class="flex-grow">{{ order.fullName }}</div>
-                    <div class="min-w-[150px]">{{ order.price }} zł</div>
+                    <div class="min-w-[150px]">{{ moment(order.created_at).format('DD.MM.YYYY') }}</div>
+                    <div class="flex-grow">{{ order.buyer }}</div>
+                    <div class="min-w-[150px]">{{ order.total }}</div>
                     <div class="min-w-[150px]">{{ order.status }}</div>
                     <div class="flex gap-2 min-w-[200px]">
-                        <button class="bg-blue-500 text-white px-4 py-2 rounded">Szczegóły</button>
+                        <Link :href="route('zamowienia.show', order.id)" class="bg-blue-500 text-white px-4 py-2 rounded">
+                        Szczegóły
+                        </Link>
+                        <button @click="deleteOrder(order.id)" class="bg-red-500 text-white px-4 py-2 rounded">
+                            Usuń
+                        </button>
                     </div>
                 </div>
             </div>

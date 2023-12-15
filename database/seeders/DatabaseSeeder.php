@@ -18,5 +18,24 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        \App\Models\Order::create([
+            'buyer' => 'Eleazar Kubiak',
+            'email' => 'mail@mail.com',
+            'total' => '100.00 zł',
+            'status' => 'Zrealizowane',
+        ]);
+        \App\Models\Order::create([
+            'buyer' => 'Erast Grzesik',
+            'email' => 'mail@mail.com',
+            'total' => '120.00 zł',
+            'status' => 'Zrealizowane',
+        ]);
+        \App\Models\Order::create([
+            'buyer' => 'Hugo Golec',
+            'email' => 'mail@mail.com',
+            'total' => '40.00 zł',
+            'status' => 'Zrealizowane',
+        ]);
     }
 }

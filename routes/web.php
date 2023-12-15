@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\OrderController;
 use App\Models\Product;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
@@ -53,10 +54,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], functi
     Route::redirect('/', '/admin/menu');
     Route::resource('menu', ProductController::class)->except(['show']);
     Route::resource('aktualnosci', PostController::class)->except(['show']);
+    Route::resource('zamowienia', OrderController::class);
 
-    Route::get('/zamowienia', function () {
-        return Inertia::render('Admin/Zamowienia');
-    });
     Route::get('/galeria', function () {
         $files = Storage::disk('public')->allFiles('gallery');
         return Inertia::render('Admin/Galeria', ['images' => $files]);
