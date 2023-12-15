@@ -3,7 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\PostController;
 use App\Models\Product;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
@@ -25,7 +27,8 @@ Route::get('/', function () {
     return Inertia::render('Home', ['products' => $products]);
 });
 Route::get('/aktualnosci', function () {
-    return Inertia::render('Aktualnosci');
+    $posts = Post::all();
+    return Inertia::render('Aktualnosci', ['posts' => $posts]);
 });
 Route::get('/menu', function () {
     $products = Product::all();
@@ -49,10 +52,8 @@ Route::delete('/photos/{photo}', [PhotoController::class, 'destroy'])->where('ph
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], function () {
     Route::redirect('/', '/admin/menu');
     Route::resource('menu', ProductController::class)->except(['show']);
+    Route::resource('aktualnosci', PostController::class)->except(['show']);
 
-    Route::get('/aktualnosci', function () {
-        return Inertia::render('Admin/Aktualnosci');
-    });
     Route::get('/zamowienia', function () {
         return Inertia::render('Admin/Zamowienia');
     });
