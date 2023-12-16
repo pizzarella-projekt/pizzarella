@@ -27,7 +27,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $post = Post::create($request->validate([
-            'title' => ['required', 'max:50'],
+            'title' => ['required', 'max:500'],
             'body' => ['required', 'max:1000'],
         ]));
 
@@ -42,7 +42,7 @@ class PostController extends Controller
     public function update(Request $request, int $id)
     {
         $data = $request->validate([
-            'title' => ['required', 'max:50'],
+            'title' => ['required', 'max:500'],
             'body' => ['required', 'max:1000'],
         ]);
 

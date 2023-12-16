@@ -16,14 +16,11 @@ const addImage = () => {
 };
 
 const removeImage = (image) => {
-    console.log(image);
     router.delete(`/photos/${image}`);
 };
 
 const onImageFileChanged = () => {
-    form.post('/photos', {
-        accept: 'application/json',
-    });
+    form.post(route('photos.store'));
 };
 </script>
 

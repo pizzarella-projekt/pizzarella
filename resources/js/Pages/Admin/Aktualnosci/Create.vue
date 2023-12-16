@@ -36,7 +36,7 @@ const form = useForm({
                         <div v-if="form.errors.image" class="text-red-500">{{ form.errors.image }}</div>
                     </div>
                     <button type="submit" :disabled="form.processing" class="bg-green-500 text-white px-4 py-2 rounded">
-                        Dodaj produkt
+                        Dodaj post
                     </button>
                 </form>
             </div>

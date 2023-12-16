@@ -1,10 +1,14 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, router } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 
 defineProps({
     products: Array,
 });
+
+const deleteProduct = (id) => {
+    router.delete(route('menu.destroy', id));
+}
 </script>
 
 <template>
@@ -37,7 +41,9 @@ defineProps({
                         <Link :href="route('menu.edit', product.id)" class="bg-blue-500 text-white px-4 py-2 rounded">
                             Edytuj
                         </Link>
-                        <button class="bg-red-500 text-white px-4 py-2 rounded">Usuń</button>
+                        <button @click="deleteProduct(product.id)" class="bg-red-500 text-white px-4 py-2 rounded">
+                            Usuń
+                        </button>
                     </div>
                 </div>
             </div>
