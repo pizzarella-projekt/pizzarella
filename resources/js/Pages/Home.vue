@@ -1,6 +1,7 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
+import ContactForm from '@/Components/ContactForm.vue';
 
 defineProps({
     products: Array,
@@ -32,28 +33,10 @@ defineProps({
             </div>
         </div>
 
-        <div class="flex flex-col gap-8 items-center py-10 bg-green-500 text-white">
+        <div class="flex flex-col gap-8 items-center py-10 bg-green-200">
             <h2 class="text-3xl">Kontakt</h2>
             <div class="flex gap-5 items-center justify-center w-full max-w-6xl px-6">
-                <div class="contact-form">
-                    <form action="#">
-                        <div class="user-details">
-                            <input type="text" name="name" placeholder="Imię" required>
-                        </div>
-                        <div class="user-details">
-                            <input type="text" name="last-name" placeholder="Nazwisko" required>
-                        </div>
-                        <div class="user-details">
-                            <input type="email" name="email" placeholder="E-mail" required>
-                        </div>
-                        <div class="user-details">
-                            <input type="password" name="password" placeholder="Hasło" required>
-                        </div>
-                        <div class="button">
-                            <button type="submit" value="Wyślij">Wyślij</button>
-                        </div>
-                    </form>
-                </div>
+                <ContactForm />
                 <div class="google-map">
                     <iframe
                         src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"

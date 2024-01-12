@@ -5,11 +5,11 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ContactFormController;
 use App\Models\Product;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 /*
@@ -45,7 +45,9 @@ Route::get('/galeria', function () {
 });
 Route::get('/kontakt', function () {
     return Inertia::render('Kontakt');
-});
+})->name('kontakt');
+
+Route::post('/kontakt', [ContactFormController::class, 'contactPost'])->name('kontakt.post');
 
 Route::post('/photos', [PhotoController::class, 'store'])->name('photos.store');
 Route::delete('/photos/{photo}', [PhotoController::class, 'destroy'])->where('photo', '.*')->name('photos.destroy');

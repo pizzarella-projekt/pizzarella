@@ -2,6 +2,7 @@
 import { Head } from '@inertiajs/vue3';
 import { fakerPL as faker } from '@faker-js/faker';
 import MainLayout from '@/Layouts/MainLayout.vue';
+import ContactForm from '@/Components/ContactForm.vue';
 </script>
 
 <template>
@@ -12,16 +13,14 @@ import MainLayout from '@/Layouts/MainLayout.vue';
 
         <div class="flex flex-col gap-4 items-center py-10">
             <h2 class="text-3xl">Kontakt</h2>
+
+            <ContactForm />
+
             <section class="contact">
                 <div class="content-container">
                     <div class="content">
                         <div class="content-box">
-                            <div class="text-box">
-                                <h2>KONTAKT</h2>
-                                <p>Marszałka Piłsudskiego 6, 46-200 Kluczbork</p>
-                                <p>pizzarella@gmail.com​​</p>
-                                <p>+48 751 921 321​​</p>
-                            </div>
+                            
                         </div>
                     </div>
 
