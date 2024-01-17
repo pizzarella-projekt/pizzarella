@@ -37,5 +37,54 @@ class DatabaseSeeder extends Seeder
             'total' => '40.00 zł',
             'status' => 'Zrealizowane',
         ]);
+
+        \App\Models\ProductAddon::create([
+            'name' => 'Cebula',
+            'price' => '6',
+        ]);
+        \App\Models\ProductAddon::create([
+            'name' => 'Mozzarella',
+            'price' => '7',
+        ]);
+        \App\Models\ProductAddon::create([
+            'name' => 'Salami',
+            'price' => '7',
+        ]);
+        \App\Models\ProductAddon::create([
+            'name' => 'Gorgonzola',
+            'price' => '6',
+        ]);
+        \App\Models\ProductAddon::create([
+            'name' => 'Rukola',
+            'price' => '8',
+        ]);
+        \App\Models\ProductAddon::create([
+            'name' => 'Pomidorki koktajlowe',
+            'price' => '6',
+        ]);
+        \App\Models\ProductAddon::create([
+            'name' => 'Karczochy',
+            'price' => '6',
+        ]);
+        \App\Models\ProductAddon::create([
+            'name' => 'Pieczarki',
+            'price' => '6',
+        ]);
+        \App\Models\ProductAddon::create([
+            'name' => 'Bakłażan',
+            'price' => '6',
+        ]);
+        \App\Models\ProductAddon::create([
+            'name' => 'Oliwki',
+            'price' => '6',
+        ]);
+        \App\Models\ProductAddon::create([
+            'name' => 'Szpinak',
+            'price' => '6',
+        ]);
+        \App\Models\ProductAddon::create([
+            'name' => 'Ananas',
+            'price' => '6',
+        ]);
     }
 }

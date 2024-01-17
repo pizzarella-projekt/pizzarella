@@ -7,6 +7,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ContactFormController;
 use App\Models\Product;
+use App\Models\ProductAddon;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -37,7 +38,8 @@ Route::get('/menu', function () {
 });
 Route::get('/menu/{id}', function ($id) {
     $product = Product::find($id);
-    return Inertia::render('Produkt', ['product' => $product]);
+    $addons = ProductAddon::all();
+    return Inertia::render('Produkt', ['product' => $product, 'addons' => $addons]);
 });
 Route::get('/galeria', function () {
     $files = Storage::disk('public')->allFiles('gallery');
