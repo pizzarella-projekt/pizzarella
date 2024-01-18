@@ -6,6 +6,7 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ContactFormController;
+use App\Http\Controllers\CartController;
 use App\Models\Product;
 use App\Models\ProductAddon;
 use App\Models\Post;
@@ -48,6 +49,8 @@ Route::get('/galeria', function () {
 Route::get('/kontakt', function () {
     return Inertia::render('Kontakt');
 })->name('kontakt');
+
+Route::resource('koszyk', CartController::class)->except(['show', 'create']);
 
 Route::post('/kontakt', [ContactFormController::class, 'contactPost'])->name('kontakt.post');
 

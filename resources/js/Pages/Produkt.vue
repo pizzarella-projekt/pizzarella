@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, router } from '@inertiajs/vue3';
 import { PLN } from '@/utils';
 import MainLayout from '@/Layouts/MainLayout.vue';
 
@@ -10,6 +10,9 @@ const props = defineProps({
 });
 
 const product = ref(props.product);
+const popupOpen = ref(false);
+const selectedAddons = ref([]);
+const amount = ref(1);
 
 const options = [
     { name: "Mała", price: product.value.small },
@@ -17,9 +20,7 @@ const options = [
     { name: "Duża", price: product.value.big },
 ];
 
-const popupOpen = ref(true);
 const selectedOption = ref(options[0]);
-const selectedAddons = ref([]);
 
 const openPopup = () => {
     popupOpen.value = true;
@@ -52,6 +53,15 @@ const calculateAddons = (addons) => {
     }
 
     return `${addons.length} ${text} - ${PLN.format(price)}`;
+};
+
+const addToCart = () => {
+    router.post('/koszyk', {
+        productId: product.value.id,
+        option: options.map(o => o.name).indexOf(selectedOption.value.name),
+        amount: amount.value,
+        addons: selectedAddons.value
+    });
 };
 </script>
 
@@ -88,10 +98,20 @@ const calculateAddons = (addons) => {
                             @click="openPopup">Wybierz</div>
                     </div>
 
-                    <div class="text-4xl self-center">Cena: {{ PLN.format(Number(selectedOption.price) +
-                        calculateAddonsPrice(selectedAddons.map((id) => addons.filter(addon => addon.id === id)))) }}</div>
-                    <a href="/menu"
-                        class="self-center bg-white text-[#22c55e] text-2xl text-center font-bold p-2 mt-6">ZAMÓW</a>
+                    <div class="text-4xl self-center">Cena: {{ PLN.format(amount * (Number(selectedOption.price) +
+                        calculateAddonsPrice(selectedAddons.map((id) => addons.filter(addon => addon.id === id))))) }}</div>
+
+                    <div class="flex items-end justify-center gap-2 mt-6">
+                        <div class="flex flex-col">
+                            <div>Ilość</div>
+                            <input type="number" name="amount" id="amount" v-model="amount"
+                                class="text-black max-w-[70px] py-[12px]">
+                        </div>
+                        <button @click="addToCart"
+                            class="bg-white text-[#22c55e] text-2xl text-center font-bold border border-[#6b7280] p-2">
+                            Dodaj do koszyka
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

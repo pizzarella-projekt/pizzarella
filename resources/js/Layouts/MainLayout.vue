@@ -15,6 +15,7 @@ import { Link } from '@inertiajs/vue3';
                 <Link href="/menu">Menu</Link>
                 <Link href="/galeria">Galeria</Link>
                 <Link href="/kontakt">Kontakt</Link>
+                <Link href="/koszyk">Koszyk</Link>
             </div>
         </header>
         <div class="w-full flex-grow">
