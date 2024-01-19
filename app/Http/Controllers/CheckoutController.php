@@ -7,11 +7,13 @@ use Inertia\Inertia;
 use App\Http\Requests\CheckoutRequest;
 use App\Models\Order;
 use App\Services\CartService;
+use App\Services\EmailNotificationService;
 
 class CheckoutController extends Controller
 {
     public function __construct(
-        protected CartService $cartService
+        protected CartService $cartService,
+        protected EmailNotificationService $emailService,
     ) {
     }
 
@@ -53,6 +55,8 @@ class CheckoutController extends Controller
         $order->save();
 
         session(['cart' => '[]']);
+
+        $this->emailService->newOrder($order);
 
         return redirect()
             ->route('kasa.index')
