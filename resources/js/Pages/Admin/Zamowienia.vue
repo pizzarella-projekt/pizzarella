@@ -2,6 +2,7 @@
 import moment from 'moment';
 import { Head, Link, router } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
+import { PLN } from '@/utils'
 
 defineProps({
     orders: Array,
@@ -30,8 +31,8 @@ const deleteOrder = (id) => {
                 <div v-for="order in orders" :key="order.id" class="flex gap-8 w-full bg-white p-8">
                     <div class="">{{ order.id }}</div>
                     <div class="min-w-[150px]">{{ moment(order.created_at).format('DD.MM.YYYY') }}</div>
-                    <div class="flex-grow">{{ order.buyer }}</div>
-                    <div class="min-w-[150px]">{{ order.total }}</div>
+                    <div class="flex-grow">{{ order.name }}</div>
+                    <div class="min-w-[150px]">{{ PLN.format(order.total) }}</div>
                     <div class="min-w-[150px]">{{ order.status }}</div>
                     <div class="flex gap-2 min-w-[200px]">
                         <Link :href="route('zamowienia.show', order.id)" class="bg-blue-500 text-white px-4 py-2 rounded">

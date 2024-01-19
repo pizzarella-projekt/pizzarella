@@ -23,7 +23,7 @@ import { Link } from '@inertiajs/vue3';
         </div>
         <footer class="flex items-center justify-center w-full p-5 bg-blue-500">
             <div class="text-white">
-                © 2023 Pizzarella
+                © 2024 Pizzarella
             </div>
         </footer>
     </div>

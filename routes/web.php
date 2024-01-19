@@ -7,6 +7,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Models\Product;
 use App\Models\ProductAddon;
 use App\Models\Post;
@@ -51,6 +52,7 @@ Route::get('/kontakt', function () {
 })->name('kontakt');
 
 Route::resource('koszyk', CartController::class)->except(['show', 'create']);
+Route::resource('kasa', CheckoutController::class)->only(['index', 'store']);
 
 Route::post('/kontakt', [ContactFormController::class, 'contactPost'])->name('kontakt.post');
 
