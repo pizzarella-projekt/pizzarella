@@ -7,45 +7,22 @@ use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use App\Models\Product;
 use App\Models\ProductAddon;
+use App\Services\CartService;
 
 class CartController extends Controller
 {
+    public function __construct(
+        protected CartService $cartService
+    ) {
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $cart = session('cart', "[]");
-        $cart = json_decode($cart, true);
-
-        $calculated = [];
-        $addonsList = ProductAddon::all('id', 'name', 'price')->keyBy('id');
-
-        foreach ($cart as $item) {
-            $product = Product::find($item['productId']);
-            $name = "Pizza $product->name " . ['Mała', 'Średnia', 'Duża'][$item['option']];
-            $price = $product->{['small', 'medium', 'big'][$item['option']]};
-            $addons = [];
-
-            foreach ($item['addons'] as $addonId) {
-                $addon = $addonsList[$addonId];
-                $price += $addon['price'];
-                $addons[] = $addon['name'];
-            }
-
-            if (count($addons) > 0) {
-                $name .= " (" . implode(", ", $addons) . ")";
-            }
-
-            $calculated[] = [
-                'name' => $name,
-                'price' => $price,
-                'amount' => $item['amount']
-            ];
-        }
-
         return Inertia::render('Koszyk', [
-            'cart' => $calculated
+            'cart' => $this->cartService->getFinalCart()
         ]);
     }
 
@@ -62,17 +39,14 @@ class CartController extends Controller
             'addons.*' => ['integer', 'exists:App\Models\ProductAddon,id'],
         ]);
 
-        $cart = $request->session()->get('cart', "[]");
-        $cart = json_decode($cart, true);
-        $cart[] = [
+        $item = [
             'productId' => $validated['productId'],
             'option' => $validated['option'],
             'amount' => $validated['amount'],
             'addons' => $validated['addons']
         ];
 
-        $cart = json_encode($cart);
-        session(['cart' => $cart]);
+        $this->cartService->addToCart($item);
 
         return to_route('koszyk.index');
     }
@@ -98,15 +72,7 @@ class CartController extends Controller
      */
     public function destroy(string $id)
     {
-        $cart = session('cart', "[]");
-        $cart = json_decode($cart, true);
-
-        if (array_key_exists($id, $cart)) {
-            array_splice($cart, $id, 1);
-        }
-
-        $cart = json_encode($cart);
-        session(['cart' => $cart]);
+        $this->cartService->deleteFromCart($id);
 
         return to_route('koszyk.index');
     }
