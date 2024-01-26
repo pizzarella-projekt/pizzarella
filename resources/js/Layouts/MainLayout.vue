@@ -21,7 +21,12 @@ import { Link } from '@inertiajs/vue3';
         <div class="w-full flex-grow">
             <slot />
         </div>
-        <footer class="flex items-center justify-center w-full p-5 bg-green-500">
+        <footer class="flex flex-col items-center justify-center w-full p-5 bg-green-500">
+            <div class="flex flex-wrap gap-4 text-white mb-4">
+                <Link href="/regulamin">Regulamin</Link>
+                <Link href="/polityka-prywatnosci">Polityka Prywatności</Link>
+                <Link href="/praca">Praca</Link>
+            </div>
             <div class="text-white">
                 © 2024 Pizzarella
             </div>

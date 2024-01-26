@@ -51,6 +51,15 @@ Route::get('/galeria', function () {
 Route::get('/kontakt', function () {
     return Inertia::render('Kontakt');
 })->name('kontakt');
+Route::get('/regulamin', function () {
+    return Inertia::render('Regulamin');
+})->name('regulamin');
+Route::get('/polityka-prywatnosci', function () {
+    return Inertia::render('PolitykaPrywatnosci');
+})->name('polityka');
+Route::get('/praca', function () {
+    return Inertia::render('Praca');
+})->name('praca');
 
 Route::resource('koszyk', CartController::class)->except(['show', 'create']);
 Route::resource('kasa', CheckoutController::class)->only(['index', 'store']);
