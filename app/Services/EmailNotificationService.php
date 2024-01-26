@@ -25,7 +25,9 @@ class EmailNotificationService
         );
         Mail::send(
             'email/new_order_client',
-            [],
+            [
+                'id' => $order->id,
+            ],
             function ($message) use ($order) {
                 $email = env('MAIL_FROM_ADDRESS');
 

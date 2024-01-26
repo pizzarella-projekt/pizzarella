@@ -8,6 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\TrackingController;
 use App\Models\Product;
 use App\Models\ProductAddon;
 use App\Models\Post;
@@ -55,6 +56,8 @@ Route::resource('koszyk', CartController::class)->except(['show', 'create']);
 Route::resource('kasa', CheckoutController::class)->only(['index', 'store']);
 
 Route::post('/kontakt', [ContactFormController::class, 'contactPost'])->name('kontakt.post');
+
+Route::get('/sledzenie/{id}', [TrackingController::class, 'index'])->name('tracking');
 
 Route::post('/photos', [PhotoController::class, 'store'])->name('photos.store');
 Route::delete('/photos/{photo}', [PhotoController::class, 'destroy'])->where('photo', '.*')->name('photos.destroy');
